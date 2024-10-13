@@ -11,23 +11,25 @@ if (!requireNamespace("CntoAPI", quietly = TRUE)) {
 library(CntoAPI)
 
 # Define UI
-ui <- page_sidebar(
-    title = "Interactive Map Viewer",
+ui <- fluidPage(
+    titlePanel("Interactive Map Viewer"),
     
-    sidebar = sidebar(
-        textInput("location", "Enter a Location:", value = "Linköping"),
-        selectInput("maptype", "Choose Map Type:", 
-                    choices = c("outdoors","stamen_toner", "stamen_toner_lite", 
-                                "stamen_terrain", "stamen_terrain_background",
-                                "stamen_terrain_labels", "stamen_terrain_lines",
-                                "alidade_smooth", "alidade_smooth_dark")),
-        sliderInput("zoom",
-                    "Select Zoom Level:", 
-                    min = 5, max = 18, value = 11)
-    ),
-    card(
-        card_header("Map Output"),
-        plotOutput("mapPlot")
+    sidebarLayout(
+        sidebarPanel(
+            textInput("location", "Enter a Location:", value = "Linköping"),
+            selectInput("maptype", "Choose Map Type:", 
+                        choices = c("outdoors","stamen_toner", "stamen_toner_lite", 
+                                    "stamen_terrain", "stamen_terrain_background",
+                                    "stamen_terrain_labels", "stamen_terrain_lines",
+                                    "alidade_smooth", "alidade_smooth_dark")),
+            sliderInput("zoom",
+                        "Select Zoom Level:", 
+                        min = 5, max = 18, value = 11)
+        ),
+        
+        mainPanel(
+            plotOutput("mapPlot")
+        )
     )
 )
 
